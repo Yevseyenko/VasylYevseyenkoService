@@ -4,6 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC)
@@ -11,34 +13,35 @@ public class CalculatorSOAPService {
     public double firstNumber;
     public double secondNumber;
     public double result;
+    NumberFormat formatter = new DecimalFormat("#0.0000");
 
     @WebMethod(operationName = "Adding")
-    public double Add(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
+    public String Add(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
         result = firstNumber + secondNumber;
-        return result;
+        return formatter.format(result);
     }
 
     @WebMethod(operationName = "Subtract")
-    public double Sub(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
+    public String Sub(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
         result = firstNumber - secondNumber;
-        return result;
+        return formatter.format(result);
     }
 
     @WebMethod(operationName = "Dividing")
-    public double Div(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
+    public String Div(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
         result = firstNumber / secondNumber;
-        return result;
+        return formatter.format(result);
     }
 
     @WebMethod(operationName = "Multiplying")
-    public double Mult(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
+    public String Mult(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
         result = firstNumber * secondNumber;
-        return result;
+        return formatter.format(result);
     }
 
     @WebMethod(operationName = "Percent")
-    public double Percent(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
+    public String Percent(@WebParam(name = "firstNumber") double firstNumber, @WebParam(name = "secondNumber") double secondNumber) {
         result = firstNumber % secondNumber;
-        return result;
+        return formatter.format(result);
     }
 }
