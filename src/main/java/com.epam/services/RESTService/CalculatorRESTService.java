@@ -3,9 +3,6 @@ package com.epam.services.RESTService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
@@ -16,12 +13,15 @@ public class CalculatorRESTService {
 
     @GET
     @Path("/add/{firstNumber}/{secondNumber}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response Add(@PathParam("firstNumber") double firstNumber, @PathParam("secondNumber") double secondNumber) {
+    public String Add(@PathParam("firstNumber") double firstNumber, @PathParam("secondNumber") double secondNumber) {
+        try {
             result = firstNumber + secondNumber;
-            return Response.ok().entity(formatter.format(result)).build();
-
+            return formatter.format(result);
+        } catch (Exception e) {
+            return "Could'nt add elements";
+        }
     }
+
 
     @GET
     @Path("/subtract/{firstNumber}/{secondNumber}")
